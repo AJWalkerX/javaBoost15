@@ -1,0 +1,23 @@
+Java-15 Çalışma Soruları Serisi 1
+Soru 1. Kullanıcıdan bir üçgenin üç kenar uzunluğunu girmesini isteyin ve bu üçgenin eşkenar, ikizkenar veya çeşitkenar olduğunu belirleyin. (if-else if-else)
+Soru 2. Kullanıcıdan bir sayı girmesini isteyin ve bu sayının 1-12 arasında bir değer olduğunu varsayarak, ayın ismini ekrana yazdırın. (Switch-Case)
+Soru 3. Kullanıcıdan bir gün numarası (1-7) girmesini isteyin ve hafta sonu mu yoksa hafta içi mi olduğunu belirleyin. (Switch-Case with Yield)
+Soru 4. Kullanıcıdan bir sayı alın ve bu sayıya kadar olan çift sayıları ekrana yazdırın. (For)
+Soru 5. 1'den 20'ye kadar olan sayıların karelerini ekrana yazdırın. (For)
+Soru 6. Kullanıcıdan negatif bir sayı girene kadar sayı girmesini isteyin ve girilen pozitif sayıları toplayın. (Do-While)
+Soru 7. Kullanıcıdan bir sayı alın ve bu sayının basamakları toplamını hesaplayın. (While)
+Soru 8.  Bir tamsayının faktöriyelini, kullanıcı negatif bir sayı girene kadar tekrar tekrar hesaplayın. (While)
+Soru 9. Kullanıcıdan bir sayı alın ve bu sayının basamaklarını tersine çevirin. (While)
+Soru 10.  Kullanıcıdan bir cümle alın ve bu cümledeki kelimeleri tek tek ekrana yazdırın. (String fonksiyonları)
+Soru 11. Kullanıcıdan bir metin alın ve bu metindeki sesli harfleri sayın. (String fonksiyonları)
+Soru 12. Kullanıcıdan bir taban ve üs değeri alın ve üssü hesaplayın. (Math fonksiyonları)
+Soru 13. Kullanıcıdan bir sayı alın ve bu sayının en yakın tam sayıya yuvarlanmış halini bulun. (Math fonksiyonları)
+Soru 14. 1 ile 50 arasında rastgele bir sayı üretin ve bu sayının çift mi tek mi olduğunu belirleyin.
+(Random Sınıfı)
+Soru 15. Rastgele bir sayı üretin ve bu sayının 1 ile 10 arasında olup olmadığını kontrol edin.
+(Random Sınıfı)
+Soru 16. İki tamsayı değişkeni tanımlayın ve bu değişkenlerin toplamını, farkını, çarpımını ve bölümünü ekrana yazdırın. (Değişkenler-Operatörler)
+Soru 17.  Bir char değeri int'e dönüştürün ve sonucu ekrana yazdırın. (implicit/explicit)
+Soru 18.  Bir float değeri int'e dönüştürün ve sonucu ekrana yazdırın. (implicit/explicit)
+Soru 19. Mutable/immutable farkı nedir?
+Soru 20. String/StringBuilder farkı nedir?

@@ -1,0 +1,24 @@
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class FileReaderUsage {
+	public static void main(String[] args) {
+		List<Ogrenci> ogrenciList = new ArrayList<>();
+		
+		try (Scanner sc = new Scanner(new FileReader("ogrListe.txt"))){
+			while (sc.hasNextLine()){
+				String satir = sc.nextLine();
+				String[] split = satir.split(",");
+				Ogrenci ogrenci = new Ogrenci(split[0].trim(),Long.parseLong(split[1].trim()));
+				ogrenciList.add(ogrenci);
+			}
+		}
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		ogrenciList.forEach(System.out::println);
+	}
+}
