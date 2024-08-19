@@ -44,7 +44,20 @@ public class Main {
 		              .forEach(user -> {
 			System.out.println();
 			System.out.println("users Array List.....:"+user);
-			//burada 10 faklı stream sorusu yazın ve çözün
 		});
+		//1.Kullanıcılar arasında en yaşlı kişiyi bulun.
+		//2.Kullanıcıların yaş ortalamasını hesaplayın.
+		//3.İsmi "A" harfi ile başlayan kullanıcıları filtreleyip listeyin.
+		//4.Kullanıcıları ülkelerine göre gruplandırın ve her ülkeden kaç kullanıcı olduğunu gösterin.
+		//5.En çok kullanılan 5 e-posta servis sağlayıcısını (gmail.com, yahoo.com gibi) ve kullanım sayılarını bulun.
+		//6.Kullanıcıları cinsiyetlerine göre ayırın ve her cinsiyetin yaş ortalamasını hesaplayın.
+		//7.30 yaşından küçük kullanıcıları bulun ve isimleriyle birlikte yaşlarını küçükten büyüğe sıralayarak
+		// listeyin.
+		//8.Kullanıcıların telefon numaralarının alan kodlarına göre gruplandırın ve her alan kodundan kaç kişi
+		// olduğunu gösterin.
+		//9.İsim ve soyisimlerinin toplam uzunluğu 15 karakterden fazla olan kullanıcıları bulun ve bu kullanıcıların
+		// tam adlarını büyük harfle yazdırın.
+		//10.Kullanıcıların doğum tarihlerine göre, hangi ayda kaç kişinin doğduğunu hesaplayın ve sonuçları ay
+		// isimlerine göre sıralayın.
 	}
 }

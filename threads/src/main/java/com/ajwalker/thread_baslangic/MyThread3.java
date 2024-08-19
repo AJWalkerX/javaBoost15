@@ -1,15 +1,18 @@
-package com.ajwalker;
+package com.ajwalker.thread_baslangic;
 
-public class MyThread  extends Thread{
+public class MyThread3 implements Runnable {
 	private String name;
 	
-	public MyThread(String name) {
+	public MyThread3(String name) {
 		this.name = name;
+	}
+	
+	public String getName() {
+		return name;
 	}
 	
 	@Override
 	public void run() {
-		super.run();
 		System.out.println(name+" isimli thread çalıştı.");
 		String activeThread = Thread.currentThread().getName();
 		for (int i = 0; i < 10; i++) {
