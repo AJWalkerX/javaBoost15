@@ -167,7 +167,7 @@ ALTER TABLE IF EXISTS public.tblmusteriler
 # tblmusteriler - tbladres  ilişkilendirme
 ```sql
 ALTER TABLE public.tbladres
-    ADD CONSTRAINT musteri_no FOREIGN KEY (musteri_id)
+    ADD CONSTRAINT musteri_FK FOREIGN KEY (musteri_id)
     REFERENCES public.tblmusteriler (id)
     ON UPDATE CASCADE
     ON DELETE CASCADE;
@@ -175,7 +175,7 @@ ALTER TABLE public.tbladres
 # tblmusteriler - tblborc  ilişkilendirme
 ```sql
 ALTER TABLE public.tblborc
-    ADD CONSTRAINT musteri_no FOREIGN KEY (musteri_id)
+    ADD CONSTRAINT musteri_FK FOREIGN KEY (musteri_id)
     REFERENCES public.tblmusteriler (id)
     ON UPDATE CASCADE
     ON DELETE CASCADE;
@@ -183,19 +183,19 @@ ALTER TABLE public.tblborc
 # tblodeme- tblodemeturu-tblmusteriler-tblsatis  ilişkilendirme
 ```sql
 ALTER TABLE public.tblodeme
-    ADD CONSTRAINT musteri_no FOREIGN KEY (musteri_id)
+    ADD CONSTRAINT musteri_FK FOREIGN KEY (musteri_id)
     REFERENCES public.tblmusteriler (id)
     ON UPDATE CASCADE
     ON DELETE CASCADE;
 
 ALTER TABLE public.tblodeme
-    ADD CONSTRAINT satis_no FOREIGN KEY (satis_id)
+    ADD CONSTRAINT satis_FK FOREIGN KEY (satis_id)
     REFERENCES public.tblsatis (id)
     ON UPDATE CASCADE
     ON DELETE CASCADE;
 
 ALTER TABLE public.tblodeme
-    ADD CONSTRAINT odeme_turu_no FOREIGN KEY (odemeturu_id)
+    ADD CONSTRAINT odeme_turu_FK FOREIGN KEY (odemeturu_id)
     REFERENCES public.tblodemeturu (id)
     ON UPDATE CASCADE
     ON DELETE CASCADE;
@@ -204,7 +204,7 @@ ALTER TABLE public.tblodeme
 
 ```sql
 ALTER TABLE public.tblsatis
-    ADD CONSTRAINT musteri_no FOREIGN KEY (musteri_id)
+    ADD CONSTRAINT musteri_FK FOREIGN KEY (musteri_id)
     REFERENCES public.tblmusteriler (id)
     ON UPDATE CASCADE
     ON DELETE CASCADE;
@@ -214,13 +214,13 @@ ALTER TABLE public.tblsatis
 
 ```sql
 ALTER TABLE public.tblsepet
-    ADD CONSTRAINT urun_numarasi FOREIGN KEY (urun_id)
+    ADD CONSTRAINT urun_FK FOREIGN KEY (urun_id)
     REFERENCES public.tblurun (id)
     ON UPDATE CASCADE
     ON DELETE CASCADE;
 
 ALTER TABLE public.tblsepet
-    ADD CONSTRAINT satis_no FOREIGN KEY (satis_id)
+    ADD CONSTRAINT satis_FK FOREIGN KEY (satis_id)
     REFERENCES public.tblsatis (id)
     ON UPDATE CASCADE
     ON DELETE CASCADE;
