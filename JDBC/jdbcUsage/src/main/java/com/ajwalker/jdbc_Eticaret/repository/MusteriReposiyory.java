@@ -34,7 +34,7 @@ public class MusteriReposiyory implements ICRUD<Musteri> {
     }
     @Override
     public void update(Musteri musteri) {
-        sql = "UPDATE tblmusteriler SET ad = %s, soyad = %s, cinsiyet = %s, dtarih = +%s, email = %s, tel = %s, sehir = %s WHERE id = %d".
+        sql = "UPDATE tblmusteriler SET ad = '%s', soyad = '%s', cinsiyet = '%s', dtarih ='%s', email = '%s', tel = '%s', sehir = '%s' WHERE id = '%d'".
                 formatted(
                         musteri.getAd(),
                         musteri.getSoyad(),
