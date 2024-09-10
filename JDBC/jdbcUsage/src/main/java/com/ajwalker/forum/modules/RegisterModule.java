@@ -22,7 +22,7 @@ public class RegisterModule {
         String surname = scanner.nextLine();
         String username = getUsername();
         String password = getUserPassword();
-        User user = new User(name, username, surname, password);
+        User user = new User(name, surname, username, password);
         userRepository.save(user);
         System.out.println("Register successful!");
     }
