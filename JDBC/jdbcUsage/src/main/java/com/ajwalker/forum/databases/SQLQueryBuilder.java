@@ -111,9 +111,8 @@ public class SQLQueryBuilder {
         return resultList;
     }
 
-    public static <T> Optional<T> findById(Class<T> entityClass, String tableName,Object id, ResultSet resultSet) {
-        String idColumnName = "id";
-        String sql = "SELECT * FROM " + tableName + " WHERE " + idColumnName + " = '" + id + "'";
+    public static <T> Optional<T> findBy(Class<T> entityClass, String tableName,String column ,Object id, ResultSet resultSet) {
+        String sql = "SELECT * FROM " + tableName + " WHERE " + column + " = '" + id + "'";
         try {
             if (resultSet.next()) {
                 T entity = entityClass.getDeclaredConstructor().newInstance();
@@ -133,4 +132,5 @@ public class SQLQueryBuilder {
 
         return Optional.empty();
     }
+
 }

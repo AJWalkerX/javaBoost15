@@ -50,7 +50,17 @@ public class UserRepository implements ICRUD<User> {
         Optional<ResultSet> resultSet = databaseHelper.executeQuery(sql);
         if (resultSet.isPresent()) {
             ResultSet rs = resultSet.get();
-            return SQLQueryBuilder.findById(User.class, "tbluser", id, rs);
+            return SQLQueryBuilder.findBy(User.class, "tbluser", "id", id, rs);
+        }
+        return Optional.empty();
+    }
+
+    public Optional<User> findByUsername(String username) {
+        sql = "SELECT * FROM tbluser WHERE username = '"+ username + "'";
+        Optional<ResultSet> resultSet = databaseHelper.executeQuery(sql);
+        if (resultSet.isPresent()) {
+            ResultSet rs = resultSet.get();
+            return SQLQueryBuilder.findBy(User.class, "tbluser","username", username, rs);
         }
         return Optional.empty();
     }

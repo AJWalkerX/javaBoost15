@@ -32,6 +32,8 @@ public class MainMenuModule {
                 break;
             }
             case 2:{ //Login
+                LoginModule loginModule = new LoginModule();
+                loginModule.loginModule();
                 break;
             }
             case 0:{
