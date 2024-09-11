@@ -110,7 +110,7 @@ public class SQLQueryBuilder {
 
         return resultList;
     }
-
+    //TODO: Optimize edilecektir!
     public static <T> Optional<T> findBy(Class<T> entityClass, String tableName,String column ,Object id, ResultSet resultSet) {
         String sql = "SELECT * FROM " + tableName + " WHERE " + column + " = '" + id + "'";
         try {

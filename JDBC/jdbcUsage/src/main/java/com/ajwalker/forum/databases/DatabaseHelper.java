@@ -3,7 +3,7 @@ package com.ajwalker.forum.databases;
 import java.sql.*;
 import java.util.Optional;
 
-import static com.ajwalker.forum.utality.Constants.*;
+import static com.ajwalker.forum.utility.Constants.*;
 
 public class DatabaseHelper {
     private Connection conn;

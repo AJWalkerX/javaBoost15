@@ -3,7 +3,7 @@ package com.ajwalker.forum.repository;
 import com.ajwalker.forum.databases.DatabaseHelper;
 import com.ajwalker.forum.databases.SQLQueryBuilder;
 import com.ajwalker.forum.entity.User;
-import com.ajwalker.forum.utality.ICRUD;
+import com.ajwalker.forum.utility.ICRUD;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -11,26 +11,35 @@ import java.util.List;
 import java.util.Optional;
 
 public class UserRepository implements ICRUD<User> {
+    private static UserRepository userRepository;
     private String sql;
-    private DatabaseHelper databaseHelper;
+    private final DatabaseHelper databaseHelper;
 
-    public UserRepository() {
-        databaseHelper = new DatabaseHelper();
+    private UserRepository() {
+        this.databaseHelper = new DatabaseHelper();
+    }
+    public static UserRepository getInstance(){
+        if (userRepository == null){
+            userRepository = new UserRepository();
+        }
+        return userRepository;
+    }
+
+
+    @Override
+    public boolean save(User user) {
+        return databaseHelper.executeUpdate(SQLQueryBuilder.generateInsert(user, "tbluser"));
+
     }
 
     @Override
-    public void save(User user) {
-        databaseHelper.executeUpdate(SQLQueryBuilder.generateInsert(user,"tbluser"));
+    public boolean update(User user) {
+        return databaseHelper.executeUpdate(SQLQueryBuilder.generateUpdate(user, "tbluser"));
     }
 
     @Override
-    public void update(User user) {
-        databaseHelper.executeUpdate(SQLQueryBuilder.generateUpdate(user,"tbluser"));
-    }
-
-    @Override
-    public void delete(int id) {
-        databaseHelper.executeUpdate(SQLQueryBuilder.generateDelete(User.class, "tbluser", id));
+    public boolean delete(int id) {
+        return databaseHelper.executeUpdate(SQLQueryBuilder.generateDelete(User.class, "tbluser", id));
     }
 
     @Override

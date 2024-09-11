@@ -23,3 +23,13 @@ Tablo : User
 ****************
 Hoşgeldin, Ad Soyad
 ****************
+1- Postları Görüntüle
+2- Post paylaş
+3- Kendi postlarını görüntüle
+4- Kullanıcıları listele
+5- Profil görüntüle
+0-logout
+
+Yapılacaklar:
+Entity kısmında Post (id,userId,baslik,icerik,paylasimTarihi)
+PostRepository(Crud İşlemleri-findAll,save)

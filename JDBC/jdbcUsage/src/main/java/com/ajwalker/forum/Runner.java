@@ -7,7 +7,5 @@ public class Runner {
     public static void main(String[] args) {
         MainMenuModule mainMenu = new MainMenuModule();
         mainMenu.mainMenuModule();
-
-
     }
 }

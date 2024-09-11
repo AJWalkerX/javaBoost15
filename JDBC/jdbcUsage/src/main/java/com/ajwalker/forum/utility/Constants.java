@@ -1,4 +1,4 @@
-package com.ajwalker.forum.utality;
+package com.ajwalker.forum.utility;
 
 public class Constants {
     public static final String DB_HOSTNAME = "localhost";
