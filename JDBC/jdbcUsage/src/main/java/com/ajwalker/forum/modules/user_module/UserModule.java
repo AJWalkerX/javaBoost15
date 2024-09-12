@@ -10,8 +10,9 @@ public class UserModule {
 
     public void showUserProfile(User user) {
         printTitle("User : "+ user.getUsername());
-        System.out.println("Name    : " + user.getName());
-        System.out.println("Surname : " + user.getSurname());
-
+        System.out.println("ID          : " + user.getId());
+        System.out.println("Name        : " + user.getName());
+        System.out.println("Surname     : " + user.getSurname());
+        System.out.println("password    : " + user.getPassword());
     }
 }

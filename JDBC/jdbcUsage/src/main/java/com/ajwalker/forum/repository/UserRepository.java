@@ -48,7 +48,7 @@ public class UserRepository implements ICRUD<User> {
         Optional<ResultSet> resultSet = databaseHelper.executeQuery(sql);
         if (resultSet.isPresent()) {
             ResultSet rs = resultSet.get();
-            return SQLQueryBuilder.generateList(User.class, "tbluser", rs);
+            return SQLQueryBuilder.generateList(User.class, rs);
         }
          return new ArrayList<>();
     }
@@ -59,7 +59,7 @@ public class UserRepository implements ICRUD<User> {
         Optional<ResultSet> resultSet = databaseHelper.executeQuery(sql);
         if (resultSet.isPresent()) {
             ResultSet rs = resultSet.get();
-            return SQLQueryBuilder.findBy(User.class, "tbluser", "id", id, rs);
+            return SQLQueryBuilder.findBy(User.class, rs);
         }
         return Optional.empty();
     }
@@ -69,7 +69,7 @@ public class UserRepository implements ICRUD<User> {
         Optional<ResultSet> resultSet = databaseHelper.executeQuery(sql);
         if (resultSet.isPresent()) {
             ResultSet rs = resultSet.get();
-            return SQLQueryBuilder.findBy(User.class, "tbluser","username", username, rs);
+            return SQLQueryBuilder.findBy(User.class, rs);
         }
         return Optional.empty();
     }

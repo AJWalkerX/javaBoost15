@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.Optional;
 
 public class PostRepository implements ICRUD<Post> {
-    private static final PostRepository postRepository = PostRepository.getInstance();
+    private static PostRepository postRepository;
     private String sql;
-    private final DatabaseHelper databaseHelper;
+    private DatabaseHelper databaseHelper;
 
 
     private PostRepository() {
@@ -47,28 +47,28 @@ public class PostRepository implements ICRUD<Post> {
         Optional<ResultSet> resultSet = databaseHelper.executeQuery(sql);
         if (resultSet.isPresent()) {
             ResultSet rs = resultSet.get();
-            return SQLQueryBuilder.generateList(Post.class, "tblpost", rs);
+            return SQLQueryBuilder.generateList(Post.class, rs);
         }
         return new ArrayList<>();
     }
 
     @Override
     public Optional<Post> findById(int id) {
-        sql = "SELECT * FROM tblpost ORDER BY id ASC WHERE id = "+ id;
+        sql = "SELECT * FROM tblpost WHERE id= "+ id;
         Optional<ResultSet> resultSet = databaseHelper.executeQuery(sql);
         if (resultSet.isPresent()) {
             ResultSet rs = resultSet.get();
-            return SQLQueryBuilder.findBy(Post.class, "tblpost", "id", id, rs);
+            return SQLQueryBuilder.findBy(Post.class, rs);
         }
         return Optional.empty();
     }
 
-    public List<Post> findByUserID(int id) {
-        sql = "SELECT * FROM tblpost ORDER BY id ASC WHERE user_id  ="+ id;
+    public List<Post> findByUserID(int userID) {
+        sql = "SELECT * FROM tblpost WHERE user_id="+ userID;
         Optional<ResultSet> resultSet = databaseHelper.executeQuery(sql);
         if (resultSet.isPresent()) {
             ResultSet rs = resultSet.get();
-            return SQLQueryBuilder.generateList(Post.class, "tblpost", rs);
+            return SQLQueryBuilder.generateList(Post.class, rs);
         }
         return new ArrayList<>();
     }

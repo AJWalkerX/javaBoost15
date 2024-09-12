@@ -29,16 +29,17 @@ public class MainMenuModule {
 
 
     public void mainMenuModule() {
-        int opt;
+        boolean isRunning = true;
         welcomeMenu();
         do {
             if (userOptional.isEmpty()) {
-                opt = mainMenuOptions(mainMenu());
+                isRunning = mainMenuOptions(mainMenu());
+
             } else {
 //                postController.setUser(userOptional);
-                opt = mainMenuUserOptions(UserMainMenu());
+                isRunning = mainMenuUserOptions(UserMainMenu());
             }
-        } while (opt != 0);
+        } while (isRunning);
     }
 
     private void welcomeMenu() {
@@ -60,7 +61,7 @@ public class MainMenuModule {
         return getIntUserInput("Enter your choice: ");
     }
 
-    private int mainMenuUserOptions(int opt) {
+    private boolean mainMenuUserOptions(int opt) {
         boolean isUserExists = true;
         switch (opt) {
             case 1: { //Show All Posts
@@ -71,10 +72,10 @@ public class MainMenuModule {
                 if (userOptional.isPresent()) {
                     boolean isSended = postModule.sharePost(userOptional.get());
                     if (isSended) {
-                        printTitle("Post Shared Successfully!");
+                        printSuccessMessage("Post Shared Successfully!");
                     }
                     else{
-                        printTitle("Post Shared Failed! Try again");
+                        printErrorMessage("Post Shared Failed! Try again");
                     }
                 } else {
                     isUserExists = false;
@@ -85,7 +86,7 @@ public class MainMenuModule {
                 if (userOptional.isPresent()) {
                     boolean isPostExist = postModule.reviewUserPosts(userOptional.get());
                     if (!isPostExist) {
-                        printTitle("Post Review Failed! Try again");
+                        printErrorMessage("Post Review Failed! Try again");
                     }
                 } else {
                    isUserExists = false;
@@ -116,7 +117,7 @@ public class MainMenuModule {
             }
             case 7: {
                 System.out.println("Gülü gülü...");
-                break;
+                return false;
             }
             default:
                 printErrorMessage("Please enter a valid option");
@@ -124,7 +125,7 @@ public class MainMenuModule {
         if (!isUserExists) {
             printErrorMessage("User not found!");
         }
-        return opt;
+        return true;
     }
 
     private int mainMenu() {
@@ -133,7 +134,7 @@ public class MainMenuModule {
         return getIntUserInput("Enter your choice: ");
     }
 
-    private int mainMenuOptions(int opt) {
+    private boolean mainMenuOptions(int opt) {
         switch (opt) {
             case 1: {//Show all Posts
                 postModule.showAllPosts();
@@ -150,13 +151,12 @@ public class MainMenuModule {
                 break;
             }
             case 4: {
-
                 System.out.println("Gülü gülü...");
-                break;
+                return false;
             }
             default:
                 printErrorMessage("Please enter a valid option");
         }
-        return opt;
+        return true;
     }
 }

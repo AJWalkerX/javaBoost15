@@ -32,7 +32,6 @@ public class PostController  {
     public List<Post> findPostByUserID(int id) {
         Optional<User> optionalUser = userController.findByID(id);
         if (optionalUser.isPresent()){
-            optionalUser = Optional.empty();
             return postRepository.findByUserID(optionalUser.get().getId());
         }
         else{

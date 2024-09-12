@@ -1,31 +1,31 @@
 package com.ajwalker.forum.entity;
-
+//CURRENT_DATE
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Post {
     private Integer id;
-    private Integer userID;
+    private Integer user_id;
     private String title;
     private String content;
-    private LocalDate postDate;
+    private LocalDate post_date;
 
     public Post() {
     }
 
     public Post(Integer userID, String title, String content) {
-        this.userID = userID;
+        this.user_id = userID;
         this.title = title;
         this.content = content;
-        this.postDate =  LocalDate.now();
+        this.post_date =  LocalDate.now();
     }
 
     public Post(Integer id, Integer userID, String title, String content) {
         this.id = id;
-        this.userID = userID;
+        this.user_id = userID;
         this.title = title;
         this.content = content;
-        this.postDate = LocalDate.now();
+        this.post_date = LocalDate.now();
     }
 
     public Integer getId() {
@@ -33,11 +33,11 @@ public class Post {
     }
 
     public Integer getUserID() {
-        return userID;
+        return user_id;
     }
 
     public void setUserID(Integer userID) {
-        this.userID = userID;
+        this.user_id = userID;
     }
 
     public String getTitle() {
@@ -57,21 +57,21 @@ public class Post {
     }
 
     public LocalDate getPostDate() {
-        return postDate;
+        return post_date;
     }
 
     public void setPostDate(LocalDate postDate) {
-        this.postDate = postDate;
+        this.post_date = postDate;
     }
 
     @Override
     public String toString() {
         return "Post{" +
                 "id=" + id +
-                ", userID=" + userID +
+                ", userID=" + user_id +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
-                ", postDate=" + postDate +
+                ", postDate=" + post_date +
                 '}';
     }
 }

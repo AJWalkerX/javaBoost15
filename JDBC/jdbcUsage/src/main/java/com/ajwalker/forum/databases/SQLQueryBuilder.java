@@ -89,7 +89,7 @@ public class SQLQueryBuilder {
         return sql;
     }
 
-    public static <T> List<T> generateList(Class<T> entityClass, String tableName, ResultSet resultSet) {
+    public static <T> List<T> generateList(Class<T> entityClass,ResultSet resultSet) {
         List<T> resultList = new ArrayList<>();
         try {
             while (resultSet.next()) {
@@ -110,9 +110,7 @@ public class SQLQueryBuilder {
 
         return resultList;
     }
-    //TODO: Optimize edilecektir!
-    public static <T> Optional<T> findBy(Class<T> entityClass, String tableName,String column ,Object id, ResultSet resultSet) {
-        String sql = "SELECT * FROM " + tableName + " WHERE " + column + " = '" + id + "'";
+    public static <T> Optional<T> findBy(Class<T> entityClass, ResultSet resultSet) {
         try {
             if (resultSet.next()) {
                 T entity = entityClass.getDeclaredConstructor().newInstance();
