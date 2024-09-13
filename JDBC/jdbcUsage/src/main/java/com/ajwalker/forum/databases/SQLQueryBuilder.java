@@ -1,15 +1,17 @@
 package com.ajwalker.forum.databases;
 
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.*;
 
 public class SQLQueryBuilder {
+
+
     public static String generateInsert(Object entity, String tableName) {
         Class<?> clazz = entity.getClass();
         Field[] fields = clazz.getDeclaredFields();
@@ -31,7 +33,7 @@ public class SQLQueryBuilder {
                     Object value = field.get(entity);
                     if (value == null) {
                         values.append("NULL");
-                    }  else if (value instanceof String || value instanceof Date || value instanceof LocalDate || value instanceof Timestamp) {
+                    } else if (value instanceof String || value instanceof Date || value instanceof LocalDate || value instanceof Timestamp) {
                         values.append("'").append(value).append("'");
                     } else {
                         values.append(value);
@@ -83,25 +85,56 @@ public class SQLQueryBuilder {
         return "UPDATE " + tableName + " SET " + setClause + " WHERE id=" + idValue;
     }
 
-    public static String generateDelete(Class<?> entityClass, String tableName, Object id) {
+    public static String generateDelete(String tableName, Object id) {
         String idColumnName = "id";
         String sql = "DELETE FROM " + tableName + " WHERE " + idColumnName + " = '" + id + "'";
         return sql;
     }
 
-    public static <T> List<T> generateList(Class<T> entityClass,ResultSet resultSet) {
+    public static <T> List<T> generateList(Class<T> entityClass, ResultSet resultSet) {
         List<T> resultList = new ArrayList<>();
         try {
             while (resultSet.next()) {
                 T entity = entityClass.getDeclaredConstructor().newInstance();
-                for (Field field : entityClass.getDeclaredFields()) {
-                    field.setAccessible(true);
-                    String fieldName = field.getName();
-                    Object value = resultSet.getObject(fieldName);
-                    if (value != null) {
-                        field.set(entity, value);
+                Class<?> currentClass = entityClass;
+                while (currentClass != null) {
+                    for (Field field : currentClass.getDeclaredFields()) {
+                        field.setAccessible(true);
+                        String fieldName = field.getName();
+                        Object value = resultSet.getObject(fieldName);
+
+                        if (value != null) {
+                            // LocalDate türü için kontrol
+                            if (field.getType().equals(LocalDate.class) && value instanceof java.sql.Date) {
+                                field.set(entity, ((java.sql.Date) value).toLocalDate());
+                            }
+                            // LocalDateTime türü için kontrol
+                            else if (field.getType().equals(LocalDateTime.class) && value instanceof Timestamp) {
+                                field.set(entity, ((Timestamp) value).toLocalDateTime());
+                            }
+                            // LocalTime türü için kontrol
+                            else if (field.getType().equals(LocalTime.class) && value instanceof java.sql.Time) {
+                                field.set(entity, ((java.sql.Time) value).toLocalTime());
+                            }
+                            // BigDecimal türü için kontrol (money veya decimal türleri)
+                            else if (field.getType().equals(BigDecimal.class) && (value instanceof Double || value instanceof Float || value instanceof Long)) {
+                                field.set(entity, BigDecimal.valueOf(((Number) value).doubleValue()));
+                            }
+                            // UUID türü için kontrol
+                            else if (field.getType().equals(UUID.class) && value instanceof UUID) {
+                                field.set(entity, value);
+                            }
+                            // Boolean türü için kontrol
+                            else if (field.getType().equals(Boolean.class) && value instanceof Boolean) {
+                                field.set(entity, value);
+                            } else {
+                                field.set(entity, value);
+                            }
+                        }
                     }
+                    currentClass = currentClass.getSuperclass();
                 }
+
                 resultList.add(entity);
             }
         } catch (Exception e) {
@@ -110,18 +143,53 @@ public class SQLQueryBuilder {
 
         return resultList;
     }
+
     public static <T> Optional<T> findBy(Class<T> entityClass, ResultSet resultSet) {
         try {
             if (resultSet.next()) {
                 T entity = entityClass.getDeclaredConstructor().newInstance();
-                for (Field field : entityClass.getDeclaredFields()) {
-                    field.setAccessible(true);
-                    String fieldName = field.getName();
-                    Object value = resultSet.getObject(fieldName);
-                    if (value != null) {
-                        field.set(entity, value);
+                Class<?> currentClass = entityClass;
+                while (currentClass != null) {
+                    for (Field field : currentClass.getDeclaredFields()) {
+                        field.setAccessible(true);
+                        String fieldName = field.getName();
+                        Object value = resultSet.getObject(fieldName);
+
+                        if (value != null) {
+                            // LocalDate türü için kontrol
+                            if (field.getType().equals(LocalDate.class) && value instanceof java.sql.Date) {
+                                field.set(entity, ((java.sql.Date) value).toLocalDate());
+                            }
+                            // LocalDateTime türü için kontrol
+                            else if (field.getType().equals(LocalDateTime.class) && value instanceof Timestamp) {
+                                field.set(entity, ((Timestamp) value).toLocalDateTime());
+                            }
+                            // LocalTime türü için kontrol
+                            else if (field.getType().equals(LocalTime.class) && value instanceof java.sql.Time) {
+                                field.set(entity, ((java.sql.Time) value).toLocalTime());
+                            }
+                            // BigDecimal türü için kontrol (money veya decimal türleri)
+                            else if (field.getType().equals(BigDecimal.class) && (value instanceof Double || value instanceof Float || value instanceof Long)) {
+                                field.set(entity, BigDecimal.valueOf(((Number) value).doubleValue()));
+                            }
+                            // UUID türü için kontrol
+                            else if (field.getType().equals(UUID.class) && value instanceof UUID) {
+                                field.set(entity, value);
+                            }
+                            // Boolean türü için kontrol
+                            else if (field.getType().equals(Boolean.class) && value instanceof Boolean) {
+                                field.set(entity, value);
+                            }
+
+                            // Diğer türler için
+                            else {
+                                field.set(entity, value);
+                            }
+                        }
                     }
+                    currentClass = currentClass.getSuperclass();
                 }
+
                 return Optional.of(entity);
             }
         } catch (Exception e) {
@@ -130,5 +198,6 @@ public class SQLQueryBuilder {
 
         return Optional.empty();
     }
+
 
 }

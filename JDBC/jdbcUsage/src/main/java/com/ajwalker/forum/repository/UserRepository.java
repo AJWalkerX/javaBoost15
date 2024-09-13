@@ -39,7 +39,7 @@ public class UserRepository implements ICRUD<User> {
 
     @Override
     public boolean delete(int id) {
-        return databaseHelper.executeUpdate(SQLQueryBuilder.generateDelete(User.class, "tbluser", id));
+        return databaseHelper.executeUpdate(SQLQueryBuilder.generateDelete("tbluser", id));
     }
 
     @Override

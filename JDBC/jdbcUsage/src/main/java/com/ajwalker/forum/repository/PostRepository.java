@@ -38,7 +38,7 @@ public class PostRepository implements ICRUD<Post> {
 
     @Override
     public boolean delete(int id) {
-       return databaseHelper.executeUpdate(SQLQueryBuilder.generateDelete(Post.class, "tblpost", id));
+       return databaseHelper.executeUpdate(SQLQueryBuilder.generateDelete( "tblpost", id));
     }
 
     @Override
