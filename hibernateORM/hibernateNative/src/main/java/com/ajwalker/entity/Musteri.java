@@ -2,13 +2,19 @@ package com.ajwalker.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "tblmusteri")
 public class Musteri {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name="seq_musteri_id", sequenceName = "seq_musteri_id", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_musteri_id")
     private Long id;
     private String ad;
+
+    @ElementCollection
+    List<String> hobiler;
 
     public Musteri() {
     }
@@ -21,6 +27,7 @@ public class Musteri {
         this.id = id;
         this.ad = ad;
     }
+
 
     public void setId(Long id) {
         this.id = id;
