@@ -2,7 +2,7 @@ package com.ajwalker.forum.utility;
 
 import java.util.Scanner;
 
-//TODO: yazı renkleri ile ilgili güncelleme yapılcak!
+
 public class ConsoleTextUtils {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
