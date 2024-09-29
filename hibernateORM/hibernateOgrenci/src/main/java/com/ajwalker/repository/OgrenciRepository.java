@@ -42,61 +42,90 @@ public class OgrenciRepository extends  RepositoryManager {
 
     // SELECT * FROM tblogrenci WHERE tckimlikno=tcno
     public Optional<Ogrenci> findByTcKimlikNo(String tcno) {
+//        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+//        CriteriaQuery<Ogrenci> criteriaQuery = criteriaBuilder.createQuery(Ogrenci.class);
+//        Root<Ogrenci> root = criteriaQuery.from(Ogrenci.class);
+//
+//        criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("tckimlik"), tcno));
+//
+//        try {
+//            return Optional.of(entityManager.createQuery(criteriaQuery).getSingleResult());
+//        }
+//        catch (Exception e) {
+//            //System.out.println(tcno+" nolu tc aranırken hata meydana geldi...."+e.getMessage());
+//            return Optional.empty();
+//        }
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Ogrenci> criteriaQuery = criteriaBuilder.createQuery(Ogrenci.class);
-        Root<Ogrenci> root = criteriaQuery.from(Ogrenci.class);
-
-        criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("tckimlik"), tcno));
-
-        try {
-            return Optional.of(entityManager.createQuery(criteriaQuery).getSingleResult());
-        }
-        catch (Exception e) {
-            //System.out.println(tcno+" nolu tc aranırken hata meydana geldi...."+e.getMessage());
+        CriteriaQuery<Ogrenci> criteria = criteriaBuilder.createQuery(Ogrenci.class);
+        Root<Ogrenci> root = criteria.from(Ogrenci.class);
+        criteria.select(root);
+        criteria.where(criteriaBuilder.equal(root.get("tcKimlikNo"), tcno));
+        try{
+            return Optional.ofNullable(entityManager.createQuery(criteria).getSingleResult());
+        }catch (Exception e){
+            System.out.println("TC kimlik bulunamadı! " + e.getMessage());
             return Optional.empty();
         }
     }
 
     // SELECT tckimlik FROM tblogrenci
     public List<String> findAllTcKimlikNo() {
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+//        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+//
+//        CriteriaQuery<String> criteriaQuery = criteriaBuilder.createQuery(String.class); // Geri dönülecek tip.
+//        Root<Ogrenci> root = criteriaQuery.from(Ogrenci.class);
+//        criteriaQuery.select(root.get("tckimlik"));
+//
+//        return entityManager.createQuery(criteriaQuery).getResultList();
 
-        CriteriaQuery<String> criteriaQuery = criteriaBuilder.createQuery(String.class); // Geri dönülecek tip.
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<String> criteriaQuery = criteriaBuilder.createQuery(String.class);
         Root<Ogrenci> root = criteriaQuery.from(Ogrenci.class);
         criteriaQuery.select(root.get("tckimlik"));
-
         return entityManager.createQuery(criteriaQuery).getResultList();
     }
 
     // SELECT * FROM tblogrenci WHERE id=?
     public Optional<Ogrenci> findById(Long id) {
+//        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+//        CriteriaQuery<Ogrenci> criteriaQuery = criteriaBuilder.createQuery(Ogrenci.class);
+//        Root<Ogrenci> root = criteriaQuery.from(Ogrenci.class);
+//
+//        criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("id"), id));
+//
+//        try {
+//            return Optional.of(entityManager.createQuery(criteriaQuery).getSingleResult());
+//        }
+//        catch (Exception e) {
+//            return Optional.empty();
+//        }
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Ogrenci> criteriaQuery = criteriaBuilder.createQuery(Ogrenci.class);
-        Root<Ogrenci> root = criteriaQuery.from(Ogrenci.class);
-
-        criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("id"), id));
-
-        try {
-            return Optional.of(entityManager.createQuery(criteriaQuery).getSingleResult());
-        }
-        catch (Exception e) {
-            return Optional.empty();
-        }
+        CriteriaQuery<Ogrenci> criteria = criteriaBuilder.createQuery(Ogrenci.class);
+        Root<Ogrenci> root = criteria.from(Ogrenci.class);
+        criteria.select(root).where(criteriaBuilder.equal(root.get("id"), id));
+        return Optional.ofNullable(entityManager.createQuery(criteria).getSingleResult());
     }
 
     // SELECT * FROM tblogrenci WHERE ad="" AND soyad=""
     public List<Ogrenci> findByAdAndSoyad(String ad, String soyad) {
+//        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+//        CriteriaQuery<Ogrenci> criteriaQuery = criteriaBuilder.createQuery(Ogrenci.class);
+//        Root<Ogrenci> root = criteriaQuery.from(Ogrenci.class);
+//
+//        //Harun:
+////		criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("ad"),ad),criteriaBuilder.equal(root.get
+////		("soyad"),soyad));
+//        criteriaQuery.select(root)
+//                .where(criteriaBuilder.and(criteriaBuilder.equal(root.get("ad"), ad),
+//                        criteriaBuilder.equal(root.get("soyad"), soyad)));
+//        return entityManager.createQuery(criteriaQuery).getResultList();
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Ogrenci> criteriaQuery = criteriaBuilder.createQuery(Ogrenci.class);
-        Root<Ogrenci> root = criteriaQuery.from(Ogrenci.class);
-
-        //Harun:
-//		criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("ad"),ad),criteriaBuilder.equal(root.get
-//		("soyad"),soyad));
-        criteriaQuery.select(root)
-                .where(criteriaBuilder.and(criteriaBuilder.equal(root.get("ad"), ad),
-                        criteriaBuilder.equal(root.get("soyad"), soyad)));
-        return entityManager.createQuery(criteriaQuery).getResultList();
+        CriteriaQuery<Ogrenci> criteria = criteriaBuilder.createQuery(Ogrenci.class);
+        Root<Ogrenci> root = criteria.from(Ogrenci.class);
+        criteria.select(root).where(criteriaBuilder.and(
+                criteriaBuilder.equal(root.get("ad"), ad),
+                criteriaBuilder.equal(root.get("soyad"), soyad)));
+        return entityManager.createQuery(criteria).getResultList();
     }
     // SELECT ad,tckimlik FROM tblogrenci
     public List<Object[]> findAllAdAndTckimlik(){
@@ -137,7 +166,7 @@ public class OgrenciRepository extends  RepositoryManager {
 //		criteriaQuery.groupBy(root.get("ad"));
 //		criteriaQuery.multiselect(root.get("ad"),criteriaBuilder.count(root.get("ad")));
 
-        criteriaQuery.multiselect(root.get("ad"),criteriaBuilder.count(root.get("ad"))).groupBy(root.get("ad"));;
+        criteriaQuery.multiselect(root.get("ad"),criteriaBuilder.count(root.get("ad"))).groupBy(root.get("ad"));
         return entityManager.createQuery(criteriaQuery).getResultList();
     }
 
